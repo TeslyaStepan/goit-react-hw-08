@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { registerThunk } from "../../redux/auth/operations";
 
 export default function RegistrationForm() {
@@ -10,11 +10,8 @@ export default function RegistrationForm() {
     password: "",
   };
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const onSubmit = (values, options) => {
-    dispatch(registerThunk(values))
-      .unwrap()
-      .then(() => navigate("/"));
+    dispatch(registerThunk(values)).unwrap();
     options.resetForm();
   };
 
