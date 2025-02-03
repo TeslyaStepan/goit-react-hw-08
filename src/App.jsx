@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "modern-normalize";
 
@@ -13,10 +13,10 @@ import ContactsPage from "./pages/ContactsPage/ContactsPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import Layout from "./components/Layout/Layout";
 import { refreshThunk } from "./redux/auth/operations";
-import { selectIsRefreshing } from "./redux/auth/selectors";
+// import { selectIsRefreshing } from "./redux/auth/selectors";
 
 const App = () => {
-  const isRefreshed = useSelector(selectIsRefreshing);
+  // const isRefreshed = useSelector(selectIsRefreshing)
 
   const dispatch = useDispatch();
   useEffect(() => {
