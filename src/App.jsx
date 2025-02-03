@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+// import { Route, Routes } from "react-router-dom";
 import "modern-normalize";
 
-import HomePage from "./pages/HomePage/HomePage";
+// import HomePage from "./pages/HomePage/HomePage";
 
 // import { fetchContacts } from "./redux/contacts/operations";
 import s from "./App.module.css";
-import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import ContactsPage from "./pages/ContactsPage/ContactsPage";
-import ErrorPage from "./pages/ErrorPage/ErrorPage";
-import Layout from "./components/Layout/Layout";
+// import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+// import LoginPage from "./pages/LoginPage/LoginPage";
+// import ContactsPage from "./pages/ContactsPage/ContactsPage";
+// import ErrorPage from "./pages/ErrorPage/ErrorPage";
+// import Layout from "./components/Layout/Layout";
 import { refreshThunk } from "./redux/auth/operations";
 // import { selectIsRefreshing } from "./redux/auth/selectors";
 
@@ -25,7 +25,8 @@ const App = () => {
 
   return (
     <div className={s.wrapper}>
-      <Routes>
+      <h1>contacts</h1>
+      {/* <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/register" element={<RegistrationPage />} />
@@ -33,7 +34,7 @@ const App = () => {
           <Route path="/contacts" element={<ContactsPage />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      </Routes> */}
     </div>
   );
 };
