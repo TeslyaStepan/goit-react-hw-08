@@ -1,27 +1,19 @@
 import { useSelector } from "react-redux";
 import Contact from "../Contact/Contact";
-import {
-  selectFilteredContacts,
-  selectIsLoading,
-} from "../../redux/contacts/selectors";
+import { selectFilteredContacts } from "../../redux/contacts/selectors";
 import s from "./ContactList.module.css";
 
 const ContactList = () => {
   const contactFilter = useSelector(selectFilteredContacts);
-  const isLoading = useSelector(selectIsLoading);
 
   return (
     <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul className={s.contactsList}>
-          {Array.isArray(contactFilter) &&
-            contactFilter.map((contact) => (
-              <Contact key={contact.id} {...contact} />
-            ))}
-        </ul>
-      )}
+      <ul className={s.contactsList}>
+        {Array.isArray(contactFilter) &&
+          contactFilter.map((contact) => (
+            <Contact key={contact.id} {...contact} />
+          ))}
+      </ul>
     </>
   );
 };

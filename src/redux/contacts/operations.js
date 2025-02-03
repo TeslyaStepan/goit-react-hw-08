@@ -13,7 +13,9 @@ export const fetchContacts = createAsyncThunk(
       if (!savedToken) {
         return thunkAPI.rejectWithValue("No token found");
       }
-      const { data } = await goitAPI.get("/contacts");
+      const { data } = await goitAPI.get("/contacts", {
+        headers: { Authorization: `Bearer ${savedToken}` },
+      });
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -29,7 +31,9 @@ export const addContact = createAsyncThunk(
       if (!savedToken) {
         return thunkAPI.rejectWithValue("No token found");
       }
-      const { data } = await goitAPI.post("/contacts", body);
+      const { data } = await goitAPI.post("/contacts", body, {
+        headers: { Authorization: `Bearer ${savedToken}` },
+      });
       thunkAPI.dispatch(fetchContacts());
       return data;
     } catch (error) {
@@ -46,7 +50,11 @@ export const deleteContact = createAsyncThunk(
       if (!savedToken) {
         return thunkAPI.rejectWithValue("No token found");
       }
-      const { data } = await goitAPI.delete(`/contacts/${id}`);
+      const { data } = await goitAPI.delete(`/contacts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${savedToken}`,
+        },
+      });
       thunkAPI.dispatch(fetchContacts());
       return data;
     } catch (error) {
