@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "modern-normalize";
 
 import HomePage from "./pages/HomePage/HomePage";
 
-// import { fetchContacts } from "./redux/contacts/operations";
 import s from "./App.module.css";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -15,17 +14,29 @@ import Layout from "./components/Layout/Layout";
 import { refreshThunk } from "./redux/auth/operations";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-// import { selectIsRefreshing } from "./redux/auth/selectors";
+import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
 
 const App = () => {
-  // const isRefreshed = useSelector(selectIsRefreshing)
+  const isRefreshed = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const [isAppReade, setisAppReady] = useState(false);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return (
+  useEffect(() => {
+    if (!isRefreshed && isLoggedIn !== null) {
+      setisAppReady(true);
+    }
+  }, [isRefreshed, isLoggedIn]);
+
+  if (!isAppReade) {
+    return null;
+  }
+
+  return isRefreshed ? null : (
     <div className={s.wrapper}>
       <Routes>
         <Route path="/" element={<Layout />}>

@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { goitAPI } from "../contacts/operations";
-import toast from "react-hot-toast";
+import axios from "axios";
+
+export const goitAPI = axios.create({
+  baseURL: "https://connections-api.goit.global",
+});
 
 export const setAuthHeader = (token) => {
   goitAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -20,7 +23,6 @@ export const registerThunk = createAsyncThunk(
     } catch (error) {
       console.log(error);
       if (error.response.data.code === 11000) {
-        toast.error("This account is already created!");
         return thunkAPI.rejectWithValue(error.message);
       }
       return thunkAPI.rejectWithValue(error.message);
